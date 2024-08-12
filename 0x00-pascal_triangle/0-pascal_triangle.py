@@ -1,29 +1,20 @@
 #!/usr/bin/python3
-""" Pascal's Triangle """
+"""
+0. Pascal's Triangle alx interview
+"""
 
 
-def pascal_triangle(n: int):
-
-    def get_row(prev: 'list[int]'):
-        """get a row in the triangle"""
-        row = [1]
-        # noticed a pattern when the length of the next row
-        # is always the length of the previous + 1
-        num_of_loops = len(prev) - 1
-        for i in range(num_of_loops):
-            row.append(prev[i] + prev[i + 1])
-        row.append(1)
-        return row
-
-    triangle = [[1]]
-
-    # base case
-    if n <= 0:
-        return []
-    elif n == 1:
-        return [[1]]
-    row = triangle[0]
-    for x in range(1, n):
-        row = get_row(row)
-        triangle.append(row)
-    return triangle
+def pascal_triangle(n):
+    """Create a function def pascal_triangle(n): that returns a list of lists
+    of integers representing the Pascal’s triangle of n
+    """
+    res = []
+    if n > 0:
+        for i in range(1, n + 1):
+            level = []
+            C = 1
+            for j in range(1, i + 1):
+                level.append(C)
+                C = C * (i - j) // j
+            res.append(level)
+    return res
